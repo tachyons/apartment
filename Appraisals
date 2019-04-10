@@ -44,6 +44,10 @@ appraise "rails-5-2" do
   end
 end
 
+appraise "rails-6-0" do
+  gem 'rails', "~> 6.0.0.beta3"
+end
+
 appraise "rails-master" do
   gem "rails", git: 'https://github.com/rails/rails.git'
   platforms :jruby do
