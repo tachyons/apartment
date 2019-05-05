@@ -23,7 +23,9 @@ before_install:
   - sudo /etc/init.d/mysql stop
   - sudo /etc/init.d/postgresql stop
   - docker-compose up -d
-  - gem install bundler -v '1.17.3'
+  - gem uninstall -v '>= 2' -i $(rvm gemdir)@global -ax bundler || true
+  - gem uninstall bundler -v '>= 2' -x || true
+  - gem install bundler -v '< 2'
 env:
   RUBY_GC_MALLOC_LIMIT: 90000000
   RUBY_GC_HEAP_FREE_SLOTS: 200000
@@ -59,3 +61,4 @@ matrix:
     - rvm: jruby-9.1.15.0
       gemfile: gemfiles/rails_master.gemfile
   fast_finish: true
+cache: bundler
