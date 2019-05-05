@@ -41,7 +41,15 @@ matrix:
     - rvm: 2.1.9
       gemfile: gemfiles/rails_5_2.gemfile
     - rvm: 2.1.9
+      gemfile: gemfiles/rails_6_0.gemfile
+    - rvm: 2.1.9
       gemfile: gemfiles/rails_master.gemfile
+    - rvm: 2.2.9 
+      gemfile: gemfiles/rails_6_0.gemfile
+    - rvm: 2.3.6
+      gemfile: gemfiles/rails_6_0.gemfile
+    - rvm: 2.4.3
+      gemfile: gemfiles/rails_6_0.gemfile
     - rvm: jruby-9.1.15.0
       gemfile: gemfiles/rails_5_1.gemfile
     - rvm: jruby-9.1.15.0
@@ -51,4 +59,3 @@ matrix:
     - rvm: jruby-9.1.15.0
       gemfile: gemfiles/rails_master.gemfile
   fast_finish: true
-cache: bundler
