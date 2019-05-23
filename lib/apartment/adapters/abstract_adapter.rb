@@ -2,6 +2,7 @@ module Apartment
   module Adapters
     class AbstractAdapter
       include ActiveSupport::Callbacks
+      extend Gem::Deprecate
       define_callbacks :create, :switch
 
       attr_writer :default_tenant
@@ -169,17 +170,16 @@ module Apartment
       #   @return {String} tenant name with Rails environment *optionally* prepended
       #
       def environmentify(tenant)
-        unless tenant.include?(Rails.env)
-          if Apartment.prepend_environment
-            "#{Rails.env}_#{tenant}"
-          elsif Apartment.append_environment
-            "#{tenant}_#{Rails.env}"
-          else
-            tenant
-          end
-        else
+        if tenant.include?(Rails.env)
           tenant
+        else
+          [Apartment.db_prefix, tenant, Apartment.db_suffix].compact.join('_')
         end
+      end
+      deprecate :environmentify, :internal_name, 2019, 8
+
+      def internal_name(tenant)
+        [Apartment.db_prefix, tenant, Apartment.db_suffix].compact.join('_')
       end
 
       #   Import the database schema

@@ -498,7 +498,7 @@ to ensure there is no conflict between your environments. This is mainly for the
 and test environments. If you wish to turn this option off in production, you could do something like:
 
 ```ruby
-config.prepend_environment = !Rails.env.production?
+config.db_prefix = Rails.env if Rails.env.production
 ```
 
 ## Tenants on different servers
